@@ -1,6 +1,9 @@
 
 const searchAllData = () =>{
     const inputElement = document.getElementById('value-field');
+    document.getElementById('details-show').innerHTML = '';
+    document.getElementById('male').classList.add('d-none');
+    document.getElementById('female').classList.add('d-none');
     const inputValue = inputElement.value;
     const URL = `https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=${inputValue}`;
     fetch(URL)
@@ -43,15 +46,38 @@ const singlePlayer =(id) =>{
     //console.log(URL)
     fetch(URL)
     .then(res => res.json())
-    .then((data) => console.log(data.players[0]))
+    .then((data) => displayData(data.players[0]))
 }
 
 const displayData = (datum) =>{
+    console.log(datum)
+    const {strThumb, strPlayer, strDescriptionEN, strGender} = datum;
 const displayContainer = document.getElementById('details-show');
-datum.forEach((data)=>{
+const div = document.createElement('div')
+if(strGender === "Male"){
+    document.getElementById('male').classList.remove('d-none');
+}
+else{
+    document.getElementById('female').classList.remove('d-none');
+}
+div.innerHTML =`
+    <div class="card mb-3 w-full h-full shadow rounded">
+        <div class="row g-0">
+            <div class="col-md-4">
+              <img class="w-75 h-50" src="${strThumb ? strThumb :'https://source.unsplash.com/random/200x200?sig=1'}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">${strPlayer}</h5>
+                <p class="card-text">Description: ${strDescriptionEN.slice(0, 500) + "..."}</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+        </div>
+    </div>
+`;
+displayContainer.appendChild(div);
 
-    
-})
 
 }
 

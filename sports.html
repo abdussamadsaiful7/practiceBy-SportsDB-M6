@@ -19,7 +19,7 @@
                        <h2>Left Side</h2>
                        <div class="d-flex w-full h-64 mx-auto pb-4" role="search">
                            <input id="value-field" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                           <button onclick="searchAllData()" class="btn btn-outline-warning fw-bold" type="submit">Search</button>
+                           <button id="btn-search" onclick="searchAllData()" class="btn btn-outline-warning fw-bold" type="submit">Search</button>
                        </div>
                    </div>
                     <div id="all-player" class="row row-cols-1 row-cols-md-2 g-4 mt-1">
@@ -28,7 +28,9 @@
                 </div>
                 <div class="col-lg-6">
                     <h2 class="bg-warning p-4 rounded">Right Side</h2>
-                    <div id="details-show">
+                    <img id="male" class="w-75 h-55 mt-5 ms-5 shadow rounded d-none" src="player/male.jpg" alt="">
+                    <img id="female" class="w-75 h-55 mt-5 ms-5 shadow rounded d-none" src="player/female.webp" alt="">
+                    <div id="details-show" class="mt-5">
 
                     </div>
                 </div>
