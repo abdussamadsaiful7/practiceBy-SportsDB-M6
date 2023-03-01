@@ -1,14 +1,19 @@
 
-const searchAllData = () =>{
+const searchAllData = (id) =>{
     const inputElement = document.getElementById('value-field');
     document.getElementById('details-show').innerHTML = '';
     document.getElementById('male').classList.add('d-none');
     document.getElementById('female').classList.add('d-none');
     const inputValue = inputElement.value;
-    const URL = `https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=${inputValue}`;
+    document.getElementById('spinner').classList.remove('d-none')
+    const searchId = id || inputValue;
+    const URL = `https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=${searchId}`;
     fetch(URL)
     .then((res) => res.json())
-    .then((data) => showPlayerData(data.player))
+    .then((data) => {
+        document.getElementById('spinner').classList.add('d-none')
+        showPlayerData(data.player)
+    })
     //console.log(URL);
     
 };
@@ -77,8 +82,8 @@ div.innerHTML =`
     </div>
 `;
 displayContainer.appendChild(div);
-
+  
 
 }
 
-searchAllData();
+searchAllData('messi');
